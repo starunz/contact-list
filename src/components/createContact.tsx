@@ -54,9 +54,9 @@ const CreateContact = () => {
 			}}
 		>
 			<Typography
-				sx={{ wordWrap: 'break-word' }}
+				sx={{ wordWrap: 'break-word', fontSize: 22, letterSpacing: 2, fontFamily: 'Roboto' }}
 				component="span"
-				variant="body2"
+				variant="subtitle1"
 				color="text.primary"
 			>
 				Criar contato
