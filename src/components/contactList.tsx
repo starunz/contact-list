@@ -13,7 +13,8 @@ import {
 
 import SearchContact from './searchContact';
 import CreateContact from './createContact';
-import ContactActions from './contactActions';
+import EditContact from './editContact';
+import DeleteContact from './deleteContact';
 
 export interface Contact {
 	img: string;
@@ -139,7 +140,8 @@ const ContactList = () => {
 									}
 								/>
 
-								<ContactActions />
+								<EditContact />
+								<DeleteContact />
 							</ListItem>
 						</List>
 					</Box>
