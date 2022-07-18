@@ -15,6 +15,7 @@ const Home = () => {
 				fontSize='3.5rem'
 				fontFamily='Edu SA Beginner'
 				align='center'
+				sx={{ letterSpacing: 4 }}
 			>
 				Contact List
 			</Typography>
