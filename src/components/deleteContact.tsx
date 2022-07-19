@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Swal from 'sweetalert2';
 
 import { 
 	Button,
@@ -13,7 +14,9 @@ import {
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const DeleteContact = () => {
+import * as api from '../services/api';
+
+const DeleteContact = ({ makeReloadContacts, contact }: any) => {
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
@@ -22,6 +25,35 @@ const DeleteContact = () => {
 
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const handleDeleteContact = async () => {
+		setOpen(false);
+
+		try {
+			const contactId = contact._id;
+
+			await api.deleteContact(contactId);
+
+			makeReloadContacts();
+		}
+		catch (error: any) {
+			if(error.response.status === 409) {
+				Swal.fire({
+					icon: 'error',
+					title: 'OOPS...',
+					text: 'Contato já deletado 🙁',
+				});
+			}
+
+			if(error.response.status === 500) {
+				Swal.fire({
+					icon: 'error',
+					title: 'OOPS...',
+					text: 'Erro com nosso servidor 🙁',
+				});
+			}
+		}
 	};
 
 	return (
@@ -38,17 +70,16 @@ const DeleteContact = () => {
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description"
 			>
-				<DialogTitle id="alert-dialog-title">
-					{'Deletar'}
-				</DialogTitle>
+				<DialogTitle id="alert-dialog-title">{'Deletar'}</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-description">
 						Tem certeza que deseja deletar esse contato?
 					</DialogContentText>
 				</DialogContent>
+
 				<DialogActions>
 					<Button onClick={handleClose}>Fechar</Button>
-					<Button onClick={handleClose} autoFocus>Deletar</Button>
+					<Button onClick={handleDeleteContact} autoFocus>Deletar</Button>
 				</DialogActions>
 			</Dialog>
 		</>
