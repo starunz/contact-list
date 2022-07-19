@@ -3,6 +3,8 @@ import { createTheme } from '@mui/material';
 
 import Home from './home';
 
+import GlobalStyle from './styles/GlobalStyle';
+
 const App = () => {
 	const theme = createTheme({
 		palette: {
@@ -18,6 +20,8 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
+			<GlobalStyle />
+			
 			<Home />
 		</ThemeProvider>
 	);
