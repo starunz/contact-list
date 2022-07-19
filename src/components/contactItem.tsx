@@ -12,8 +12,9 @@ import {
 
 import EditContact from './editContact';
 import DeleteContact from './deleteContact';
+import { formatPhoneNumber } from './helpers/formatHelper';
 
-const ContactItem = ({ contact }: any) => {
+const ContactItem = ({ contact, makeReloadContacts }: any) => {
 	return(
 		<Box
 			sx={{
@@ -65,14 +66,20 @@ const ContactItem = ({ contact }: any) => {
 									variant="body2"
 									color="text.primary"
 								>
-									{contact?.phone}
+									{formatPhoneNumber(contact?.phone)}
 								</Typography>
 							</React.Fragment>
 						}
 					/>
 
-					<EditContact />
-					<DeleteContact />
+					<EditContact 
+						contact={contact}
+						makeReloadContacts={makeReloadContacts}
+					/>
+					<DeleteContact 
+						contact={contact}
+						makeReloadContacts={makeReloadContacts} 
+					/>
 				</ListItem>
 			</List>
 		</Box>
